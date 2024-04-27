@@ -28,6 +28,7 @@ function App() {
 	return (
 		<div className="wrapper">
 			<Router>
+        <Nav />
 				<Routes>
 					<Route
 						path="/"
@@ -39,7 +40,6 @@ function App() {
 
 				<Footer />
 			</Router>
-			<Nav />
 		</div>
 	);
 }
