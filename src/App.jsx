@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 */
 import Nav from "./components/common/Nav";
 import Footer from "./components/common/Footer";
+import NotFound from "./components/common/NotFound.jsx";
 import Home from "./components/home/Home";
 import StaffList from "./components/staff/StaffList";
 import PetsList from "./components/pets/PetsList";
@@ -28,7 +29,7 @@ function App() {
 	return (
 		<div className="wrapper">
 			<Router>
-        <Nav />
+				<Nav />
 				<Routes>
 					<Route
 						path="/"
@@ -36,12 +37,8 @@ function App() {
 					/>
 					<Route path="/staff" element={<StaffList employees={employees} />} />
 					<Route path="/pets" element={<PetsList pets={pets} />} />
-          <Route
-            path="/pets/:petKind"
-            element={<PetsList
-              pets={pets}
-            />}
-          />
+					<Route path="/pets/:petKind" element={<PetsList pets={pets} />} />
+					<Route path="*" element={<NotFound />} />
 				</Routes>
 
 				<Footer />
