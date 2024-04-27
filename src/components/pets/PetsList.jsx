@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import {  useParams } from "react-router-dom"
+import {  useParams ,useNavigate} from "react-router-dom"
 import PetsListNav from "./PetsListNav";
 import Pet from "./Pet";
 import "./PetsList.css";
 
 export const PetsList = ({ pets }) => {
+  const navigate = useNavigate()
   const [ filteredPets, setFilteredPets ] = useState(pets)
   const { petKind } = useParams();
   console.log(petKind)
@@ -25,8 +26,12 @@ export const PetsList = ({ pets }) => {
       case "dogs":
         setFilteredPets(dogs);
         break
-      default:
+      case "all":
         setFilteredPets(pets);
+        break
+      default:
+        navigate("*")
+        
     }
   }
 
