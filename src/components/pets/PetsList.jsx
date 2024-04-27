@@ -1,9 +1,13 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import {  useParams } from "react-router-dom"
 import PetsListNav from "./PetsListNav";
 import Pet from "./Pet";
 import "./PetsList.css";
 
 export const PetsList = ({ pets }) => {
+  const [ filteredPets, setFilteredPets ] = useState(pets)
+  const { petKind } = useParams();
+  console.log(petKind)
   const [cats, dogs] = pets.reduce(
     (acc, pet) => {
       const position = pet.kind === "Cat" ? 0 : 1;
@@ -13,18 +17,29 @@ export const PetsList = ({ pets }) => {
     [[], []]
   );
 
+  function filterPets(petKind) {
+    switch(petKind) {
+      case "cats":
+        setFilteredPets(cats);
+        break;
+      case "dogs":
+        setFilteredPets(dogs);
+        break
+      default:
+        setFilteredPets(pets);
+    }
+  }
+
+  useEffect(() => {
+    filterPets(petKind)
+  }, [petKind])
+
   return (
     <section className="pets-wrapper">
       <PetsListNav cats={cats} dogs={dogs} />
       <section className="pets-list">
-        {/* All cats section */}
-        {cats.map((cat) => (
-          <Pet key={cat.id} kind="cat" pet={cat} />
-        ))}
-
-        {/* All dogs section */}
-        {dogs.map((dog) => (
-          <Pet key={dog.id} kind="dog" pet={dog} />
+        {filteredPets.map((pet) => (
+          <Pet key={pet.id} kind={pet.kind.toLowerCase()} pet={pet} />
         ))}
       </section>
     </section>
@@ -32,3 +47,17 @@ export const PetsList = ({ pets }) => {
 };
 
 export default PetsList;
+
+
+// Original Cat and Dog Maps
+{/* All cats section */}
+{/* {cats.map((cat) => (
+  <Pet key={cat.id} kind="cat" pet={cat} />
+))} */}
+
+{/* All dogs section */}
+{/* {dogs.map((dog) => (
+  <Pet key={dog.id} kind="dog" pet={dog} />
+))} */}
+
+

@@ -18,7 +18,7 @@ function Nav() {
             <Link to="/staff">All Staff</Link>
           </li>
           <li>
-            <Link to="/pets">All Pets</Link>
+            <Link to="/pets/all">All Pets</Link>
           </li>
         </ul>
       </aside>
@@ -27,3 +27,9 @@ function Nav() {
 }
 
 export default Nav;
+/*
+/pets/all/1
+/pets/cats/1
+/pets/cats/1
+/pets/dogs/2
+*/
