@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {  useParams ,useNavigate} from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import PetsListNav from "./PetsListNav";
 import Pet from "./Pet";
 import "./PetsList.css";
@@ -8,8 +8,7 @@ export const PetsList = ({ pets }) => {
   const navigate = useNavigate()
   const [ filteredPets, setFilteredPets ] = useState(pets)
   const { petKind } = useParams();
-  console.log(petKind)
-  const [cats, dogs] = pets.reduce(
+  const [ cats, dogs ] = pets.reduce(
     (acc, pet) => {
       const position = pet.kind === "Cat" ? 0 : 1;
       acc[position].push(pet);
@@ -31,7 +30,6 @@ export const PetsList = ({ pets }) => {
         break
       default:
         navigate("*")
-        
     }
   }
 
